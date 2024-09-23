@@ -1,4 +1,4 @@
-class Api::V1::BookSearchcontroller < ApplicationController
+class Api::V1::BookSearchController < ApplicationController
   def show
     location = params[:location]
     quantity = params[:quantity].to_i
@@ -8,7 +8,8 @@ class Api::V1::BookSearchcontroller < ApplicationController
       return
     end
 
-    forecast = WeatherService.get_weather(location)
+    coordinates = LocatorService.get_location(location)
+    forecast = WeatherService.get_weather(coordinates[:lat], coordinates[:lng])
 
     books = BookSearchService.search_books(location, quantity)
 
