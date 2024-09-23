@@ -1,6 +1,6 @@
 class ForecastSerializer
   def initialize(forecast_data)
-
+    @forecast_data = forecast_data
   end
 
   def serialized_json
@@ -47,7 +47,7 @@ class ForecastSerializer
   end
 
   def hourly_weather
-    @forecast_data[:forecast][:forecastday].first[hour].map do |hour|
+    @forecast_data[:forecast][:forecastday].first[:hour].map do |hour|
       {
         time: hour[:time].split(" ")[1],
         temperature: hour[:temp_f],
