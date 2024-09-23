@@ -11,5 +11,10 @@ class WeatherService
       req.params["days"] = 5
     end
     JSON.parse(response.body, symbolize_names: true)
+
+    {
+      summary: json[:current][:condition][:text],
+      temperature: "#{json[:current][:temp_f]} F"
+    }
   end
 end
