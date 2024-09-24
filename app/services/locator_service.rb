@@ -8,6 +8,7 @@ class LocatorService
       req.params["key"] = Rails.application.credentials.mapquest[:key]
       req.params["location"] = location
     end
-    JSON.parse(response.body, symbolize_names: true)
+    locations = JSON.parse(response.body, symbolize_names: true)
+    results = locations[:results].first[:locations].first[:latLng]
   end
 end
