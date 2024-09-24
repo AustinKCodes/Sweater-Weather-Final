@@ -16,7 +16,7 @@ RSpec.describe "Munchies API" do
     end
 
     it "should return a successful response" do
-      get "/api/v1/munchies?location=#{location}&food=#{food}"
+      get "/api/v1/munchies?location=denver%2C%20co&food=#{food}"
       binding.pry
       expect(response).to have_http_status(:success)
     end
