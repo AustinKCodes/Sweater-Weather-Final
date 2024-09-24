@@ -11,6 +11,7 @@ class SearchService
       req.params["limit"] = 1
     end
     data = JSON.parse(response.body, symbolize_names: true)
-    business = data["businesses"].first
+    business = data[:businesses].first
+    #binding.pry
   end
 end

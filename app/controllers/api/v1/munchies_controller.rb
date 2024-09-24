@@ -1,6 +1,7 @@
 class Api::V1::MunchiesController < ApplicationController
   def index
-    location = LocatorService.get_location(show_params[:location])
+    #binding.pry
+    location = LocatorService.get_location(params[:destination])
     forecast_data = WeatherService.get_weather(location)
     restaurant_data = SearchService.find_restaurants(show_params[:destination], show_params[:food])
 
@@ -10,6 +11,6 @@ class Api::V1::MunchiesController < ApplicationController
   private
 
   def show_params
-    params.permit(:location, :food, :destination)
+    params.permit(:food, :destination)
   end
 end

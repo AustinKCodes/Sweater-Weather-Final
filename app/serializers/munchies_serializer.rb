@@ -1,4 +1,4 @@
-class MunchieSerializer
+class MunchiesSerializer
   def initialize(location, forecast_data, restaurant_data)
     @location = location
     @forecast_data = forecast_data
@@ -18,6 +18,7 @@ class MunchieSerializer
       }
     }
   end
+  binding.pry
 
   private
 

@@ -4,10 +4,11 @@ RSpec.describe "Munchies API" do
   describe "get /api/v1/munchies" do
     let(:location) { "Denver, CO" }
     let(:food) { "italian" }
+    let(:destination_city) { "Denver, CO" }
     let(:forecast_data) { { summary: "Sunny", temperature: "75" } }
     let(:restaurant_data) { { name: "Tavernetta",
                             address: "1889 16th St, Denver, CO 80202",
-                            raitng: 4.5,
+                            rating: 4.5,
                             reviews: 767 } }
     before do
       allow(LocatorService).to receive(:get_location).and_return(location)
@@ -16,9 +17,32 @@ RSpec.describe "Munchies API" do
     end
 
     it "should return a successful response" do
-      get "/api/v1/munchies?location=denver%2C%20co&food=#{food}"
-      binding.pry
+      get "/api/v1/munchies?location=#{location}&food=#{food}"
       expect(response).to have_http_status(:success)
+    end
+
+    it "renders the correct response" do
+      get "/api/v1/munchies?location=#{location}&food=#{food}"
+      response1 = {
+        data: {
+          id: nil,
+          attributes: {
+            destination_city: location,
+            forecast: {
+              summary: forecast_data[:summary],
+              temperature: forecast_data[:temp_f]
+            },
+            restaurant: {
+              name: restaurant_data[:name],
+              address: restaurant_data[:address],
+              rating: restaurant_data[:rating],
+              reviews: restaurant_data[:reviews]
+            }
+          }
+        }
+      }
+
+      expect(JSON.parse(response.body)).to eq(response1)
     end
   end
 end
