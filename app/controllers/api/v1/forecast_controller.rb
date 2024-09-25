@@ -3,6 +3,7 @@ class Api::V1::ForecastController < ApplicationController
     location = LocatorService.get_location(show_params[:location])
     forecast_data = WeatherService.get_weather(location)
     render json: ForecastSerializer.new(forecast_data).serialized_json
+    binding.pry
   end
 
   private

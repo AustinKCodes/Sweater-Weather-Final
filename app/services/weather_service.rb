@@ -10,6 +10,7 @@ class WeatherService
       req.params["q"] = "#{;location[:lat]},#{location[:lng]}"
       req.params["days"] = 5
     end
-    JSON.parse(response.body, symbolize_names: true)
+    weather_data = JSON.parse(response.body, symbolize_names: true)
+    
   end
 end
