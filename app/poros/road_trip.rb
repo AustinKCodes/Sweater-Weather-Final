@@ -12,11 +12,13 @@ class RoadTrip
     eta = time_math(time)
     weather_data[:forecast][:forecastday].each do |day|
       forecast = day[:hour].find do |hour|
-        hour[:time] >= eta
+        hour[:time] == eta
       end
+      
       if forecast
-        { temperature: forecast[:temperature],
-        conditions: forecast[:conditions] }
+        return {
+          datetime: forecast[:time], temperature: forecast[:temp_f], condition: forecast[:condition][:text]
+        }
       else
         "No weather available for this time"
       end

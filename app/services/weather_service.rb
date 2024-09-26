@@ -11,6 +11,5 @@ class WeatherService
       req.params["days"] = 5
     end
     weather_data = JSON.parse(response.body, symbolize_names: true)
-    
   end
 end
